@@ -2,7 +2,6 @@
 const {
   Model
 } = require('sequelize');
-const User=require('../models/user')
 module.exports = (sequelize, DataTypes) => {
   class Userdetails extends Model {
     /**
@@ -12,16 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      //belogs to
       Userdetails.hasOne(models.User,{
         foreignKey:'userid'
-      }
-       );
-      // User.belongsTo(Userdetails);
-
+      });
+      
     }
   }
   Userdetails.init({
-    qualification: DataTypes.STRING,
+    education: DataTypes.STRING,
     salary: DataTypes.INTEGER,
     userid: DataTypes.INTEGER
   }, {

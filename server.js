@@ -10,8 +10,13 @@ app.use(express.urlencoded({extended:true}))
 //routes
 
 const router=require('./routes/userroute.js')
-app.use('/user/',router);
+app.use('/user',router);
 
+const detailrouter=require('./routes/userdetailsrouter')
+app.use('/userdetail',detailrouter);
+
+const courserouter=require('./routes/coursesrouter.js')
+app.use('/course/',courserouter)
 
 //test api
 app.get('/',(req,res)=>{

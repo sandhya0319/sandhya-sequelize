@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      qualification: {
+      education: {
         type: Sequelize.STRING
       },
       salary: {
@@ -17,11 +17,11 @@ module.exports = {
       },
       userid: {
         type: Sequelize.INTEGER,
-        references: {
-          model: "Users",
-          key: "id"
+        references:{
+          model:"Users",
+          key:"id",
         },
-        onDelete: "CASCADE"
+        onDelete:"CASCADE"
       },
       createdAt: {
         allowNull: false,

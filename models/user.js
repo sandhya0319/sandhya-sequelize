@@ -6,7 +6,15 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+
+      //hasone
+      // User.hasOne(models.Userdetails,{
+      //   foreignKey:'userid'
+      // });
       User.belongsTo(models.Userdetails,{
+        foreignKey:"userid"
+      });
+      User.belongsTo(models.courses,{
         foreignKey:'userid'
       });
     }
