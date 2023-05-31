@@ -4,7 +4,7 @@ const router=require('express').Router();
 
 router.post('/adduser',usercontroller.addusers);
 router.get('/displayuser',usercontroller.selectusers);
-router.put('/displayuser',usercontroller.updateusers);
+router.put('/updateuser/:id/:userid',usercontroller.updateusers);
 router.get('/displayuser/:id',usercontroller.deleteusers);
 
 

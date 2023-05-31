@@ -11,7 +11,7 @@ const addusers = async (req, res) => {
   try {
     //console.log("kk", req.body);
     let data = await users.create(
-      {
+      {...req.body},
         // firstName: "anya",
         // lastName: "abc",
         // email: "abc@gamil.com",
@@ -20,15 +20,15 @@ const addusers = async (req, res) => {
         //   education: "mca",
         //   salary: 3456,
         // },
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
+        // firstName: req.body.firstName,
+        // lastName: req.body.lastName,
+        // email: req.body.email,
 
-        userdetail: {
-          education: req.body.userdetail.education,
-          salary: req.body.userdetail.salary,
-        },
-      },
+        // userdetails: {
+        //   education: req.body.userdetails.education,
+        //   salary: req.body.userdetails.salary,
+        // },
+      //},
       { include: { model: userdetail } },
       { transaction: t }
     );
@@ -53,7 +53,7 @@ const selectusers = async (req, res) => {
           // ]
         },
       ],
-      where: { id: 38 },
+      where: { id: 2 },
     });
     res.send(displayusers);
     await t.commit();
@@ -66,27 +66,21 @@ const selectusers = async (req, res) => {
 //update
 //how we update in both tables
 const updateusers = async (req, res) => {
-  //const id=req.query.id;
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const email = req.body.email;
-  const education = req.body.userdetail.education;
-  const salary = req.body.userdetail.salary;
+  const id=req.params.id;
+  const userid=req.params.userid;
+  // const firstName = req.body.firstName;
+  // const lastName = req.body.lastName;
+  // const email = req.body.email;
+  // const education = req.body.userdetail.education;
+  // const salary = req.body.userdetail.salary;
 
   const t = await db.sequelize.transaction();
   try {
-    const updatedata = await users.update({
-      where: { id: 38 },
-      firstName: firstName,
-      lastName:lastName,
-      email,
-      userdetail: {
-        education,
-        salary,
-      },
-      //   include: [{ model: userdetail }],
-    });
-    res.send(updatedata);
+    await users.update(req.body,{where:{id:id}});
+
+    await userdetail.update(req.body.userdetail,{where:{userid:userid}});
+    
+    //res.send({updatedata,updatedetaildata});
     await t.commit();
   } catch (error) {
     await t.rollback();

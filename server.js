@@ -17,7 +17,7 @@ app.get('/',(req,res)=>{
     res.json({message:'hello i am sandhya'})
 })
 
-const PORT=process.env.PORT || 4040;
+const PORT=process.env.PORT || 5555;
 
 app.listen(PORT,()=>{
     console.log(`Server listen at port ${PORT}`)
