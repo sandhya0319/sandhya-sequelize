@@ -58,7 +58,7 @@ const displaystudents = async (req, res) => {
           model: course,
         },
       ],
-      where: { id: 1 },
+      where: { id: 5 },
     });
     // const data=await student.findAll({});
     res.send(data);
@@ -71,18 +71,20 @@ const displaystudents = async (req, res) => {
 
 const updatestudents=async(req,res)=>{
   const transaction = await db.sequelize.transaction();
+  const id=req.params.id;
+  const userid=req.params.userid;
+  const courseid=req.params.id;
+  // console.log(id,"idddd");
+  // console.log(userid,"useridddddd");
   try {
-    const id=req.params.id;
-    const userid=req.params.userid;
-    console.log(id,"idddd");
-    console.log(userid,"useridddddd");
-    
     await student.update(req.body,{where:{id:id}});
-  
-    await course.update(req.body.course,{where:{id:userid}});
+    //if  update particular course
 
-     //res.send({data,updatedata});
-    //  req.send("updated")
+    //await course.update(req.body.course,{where:{userid:userid,id:courseid}});
+
+    await course.update(req.body.course,{where:{userid:userid}});
+
+  
     await transaction.commit();
 
   } catch (error) {
