@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     year: DataTypes.INTEGER
   }, {
     sequelize,
+    paranoid:true,
     modelName: 'team',
   });
   return team;

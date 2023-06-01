@@ -9,8 +9,8 @@ app.use(express.urlencoded({extended:true}))
 
 //routes
 
-const router=require('./routes/studentrouter.js')
-app.use('/student',router);
+const router=require('./routes/teamrouter.js')
+app.use('/teams',router);
 
 //test api
 app.get('/',(req,res)=>{
